@@ -15,4 +15,5 @@ The state should keep track of everything the game needs to know to function
 
 ## Step 3: Passing State down
 Here the cell states is passed down to the individual grid cells. A click event handler is also passed down to the grid cells. Later, the basic functionality to change a cell circle's color is implemented
+The Circle component updated to change its color based on the cell state(If the cell state is 1:"Black", 2:Red)
 Link to my codepen code: https://codepen.io/theintelligent/pen/KjgyXL

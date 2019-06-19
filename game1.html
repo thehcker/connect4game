@@ -11,8 +11,15 @@
 	<div id="root"></div>
 	<script type="text/babel">
 		function Circle(props){
+  var color = "white"
+  if (props.color == 1){
+    color: "black"
+  }
+  else if(props.color == 2){
+    color: "red"
+  }
   var style = {
-    backgroundColor: "white",
+    backgroundColor: color,
     border: "1px solid black",
     borderRadius: "100%",
     paddingTop:"98%"
@@ -27,15 +34,17 @@ function Cell(props){
     backgroundColor:"yellow",
     
   }
-  return <div style = {style}><Circle/></div>
+  // Add an event handler to the onClick attribute on the <div> attribute of the Circle component and the this.state attribute to the Circle component
+  return <div style = {style} onClick = {() => props.handleClick(props.row, props.col)}><Circle cell ={props.cell}/></div>
 }
 function Row(props){
   var style = {
     display: "flex",
   }
   var cells = []
+  // Add event handler and the individual cell states to the Cell component
   for(let i=0; i<7; i++){
-    cells.push(<Cell/>)
+    cells.push(<Cell key = {i} cell = {props.cells[i]} row = {props.row} col = {i} handleClick = {props.handleClick}/>)
   }
   return (
     <div style = {style}>{cells}</div>
@@ -44,7 +53,8 @@ function Row(props){
 function Board(props){
   var rows = []
   for(let i = 5; i >= 0; i--){
-    rows.push(<Row/>)
+    // Add an event handler and pass in the arrays of length 7 from the this.state.cells 2-D array to the Row components
+    rows.push(<Row key = {i} row = {i} cells = {props.cells[i]} handleClick = {props.handleClick}/>)
   }
     return (
       <div>
@@ -64,14 +74,24 @@ class Game extends React.Component{
     this.handleClick = this.handleClick.bind(this)
   }
   // Add the handleCllick component to the Game component
-handleClick(){
-  console.log("clicked")
-}
+// handleClick method modified to get a more detailed idea of which cell is being clicked
+  handleClick(row,col){
+        console.log("row: " + row + " | col: " + col)
+        console.log(this.state.cells)
+        var temp = [];
+        for(let i = 0; i < 6; i++){
+          temp.push(this.state.cells[i].slice())
+        }
+        temp[row][col] = 1;
+        this.setState({cells:temp})
+    }
+
 render(){
+  // Passing the handleClick method and the this.state.cells attribute into the Board component
   return (
       <div>
       <h1>Black Turn</h1>
-      <Board/>
+      <Board cells = {this.state.cells} onClick = {this.handleClick}/>
       <button>Restart</button>
       </div>  
     )
