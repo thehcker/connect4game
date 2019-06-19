@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+       <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.24.0/babel.js"></script>
+	<title></title>
+</head>
+<body>
+	<div id="root"></div>
+	<script type="text/babel">
+		function Circle(props){
+  var style = {
+    backgroundColor: "white",
+    border: "1px solid black",
+    borderRadius: "100%",
+    paddingTop:"98%"
+  }
+  return <div style = {style}></div>
+}
+function Cell(props){
+  var style = {
+    height:"50px",
+    width:"50px",
+    border:"1px solid black",
+    backgroundColor:"yellow",
+    
+  }
+  return <div style = {style}><Circle/></div>
+}
+function Row(props){
+  var style = {
+    display: "flex",
+  }
+  var cells = []
+  for(let i=0; i<7; i++){
+    cells.push(<Cell/>)
+  }
+  return (
+    <div style = {style}>{cells}</div>
+  )
+}
+function Board(props){
+  var rows = []
+  for(let i = 5; i >= 0; i--){
+    rows.push(<Row/>)
+  }
+    return (
+      <div>
+        {rows}
+      </div>
+    )
+  }
+class Game extends React.Component{
+  constructor(props){
+    super(props)
+  }
+render(){
+  return (
+      <div>
+      <h1>Black Turn</h1>
+      <Board/>
+      <button>Restart</button>
+      </div>  
+    )
+   }
+}
+ReactDOM.render(
+  <Game/>,
+  document.getElementById("root")
+)
+		
+	</script>
+
+</body>
+</html>
