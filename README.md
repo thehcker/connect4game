@@ -9,3 +9,4 @@
 ## A component that represents the game board (red)
 ## A section that displays the game messages (blue)
 ## A section with a restart button ( green)
+Link to my codepen code: https://codepen.io/theintelligent/pen/KjgyXL
