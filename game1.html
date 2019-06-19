@@ -60,7 +60,13 @@ class Game extends React.Component{
       cells.push(newArray(7).fill(0))
     }
     this.state = {player: false, cells: cells, winner: 0}
+    // Bind the handleClick component 
+    this.handleClick = this.handleClick.bind(this)
   }
+  // Add the handleCllick component to the Game component
+handleClick(){
+  console.log("clicked")
+}
 render(){
   return (
       <div>
